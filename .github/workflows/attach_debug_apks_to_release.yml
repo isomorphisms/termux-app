@@ -23,6 +23,7 @@ jobs:
 
       - name: Build and attach APKs to release
         shell: bash {0}
+        working-directory: _
         env:
           PACKAGE_VARIANT: ${{ matrix.package_variant }}
         run: |
@@ -40,7 +41,7 @@ jobs:
            exit_on_error "The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html."
           fi
 
-          APK_DIR_PATH="./app/build/outputs/apk/debug"
+          APK_DIR_PATH="$GITHUB_WORKSPACE/_/app/build/outputs/apk/debug"
           APK_VERSION_TAG="$RELEASE_VERSION_NAME+${{ env.PACKAGE_VARIANT }}-github-debug"
           APK_BASENAME_PREFIX="termux-app_$APK_VERSION_TAG"
 
