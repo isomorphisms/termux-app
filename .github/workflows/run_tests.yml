@@ -22,5 +22,6 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
     - name: Execute tests
+      working-directory: _
       run: |
         ./gradlew test
